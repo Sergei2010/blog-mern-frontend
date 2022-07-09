@@ -18,7 +18,7 @@ export const AddPost = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const isAuth = useSelector(selectIsAuth);
-  const [isLoading, setLoading] = React.useState(false);
+  const [/* isLoading */, setLoading] = React.useState(false);
   const [text, setText] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [tags, setTags] = React.useState('');
@@ -109,7 +109,7 @@ export const AddPost = () => {
   }
 
   return (
-    <Paper style={ { padding: 30 } }>
+    <Paper elevation={ 0 } style={ { padding: 30 } }>
       <Button
         onClick={ () => inputFileRef.current.click() }
         variant="outlined"

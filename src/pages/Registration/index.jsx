@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Navigate } from 'react-router-dom';
 
-import { fetchRegister, fetchAuth, selectIsAuth } from "../../redux/slices/auth";
+import { fetchRegister, selectIsAuth } from "../../redux/slices/auth";
 
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -50,7 +50,7 @@ export const Registration = () => {
   }
 
   return (
-    <Paper classes={ { root: styles.root } }>
+    <Paper elevation={ 0 } classes={ { root: styles.root } }>
       <Typography classes={ { root: styles.title } } variant="h5">
         Создание аккаунта
       </Typography>
