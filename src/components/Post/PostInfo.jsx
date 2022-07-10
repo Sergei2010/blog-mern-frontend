@@ -5,8 +5,7 @@ import { Post } from './index';
 
 import { fetchPosts } from '../../redux/slices/posts';
 
-export default function PostInfo(sort) {
-
+export default function PostInfo({ value }) {
 	const [data, setData] = React.useState([]);
 	const dispatch = useDispatch();
 	const userData = useSelector((state) => state.auth.data);
@@ -18,8 +17,16 @@ export default function PostInfo(sort) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	const arr = posts.items.slice();
+	const sortPopular = (a, b) => b.viewsCount - a.viewsCount;
+	const sortDate = (a, b) => new Date(b.createdAt) - new Date(a.createdAt);
+
 	React.useEffect(() => {
-		setData(sort);
+		setData(arr.sort((a, b) => {
+			return value === '1'
+				? sortPopular(a, b)
+				: sortDate(a, b);
+		}));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [posts]);
 
@@ -44,7 +51,6 @@ export default function PostInfo(sort) {
 					/>
 				)
 			}
-			{ console.log(data) }
 		</>
 	);
-}
+};
