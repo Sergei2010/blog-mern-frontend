@@ -1,6 +1,5 @@
 // @ts-nocheck
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
@@ -11,18 +10,6 @@ import TabPanel from '@mui/lab/TabPanel';
 import PostInfo from './Post/PostInfo';
 
 export default function PostsBlock() {
-
-	const { posts } = useSelector(state => state.posts);
-
-	const sortDate = posts.items.slice().sort((a, b) => {
-		let dateA = new Date(a.createdAt), dateB = new Date(b.createdAt);
-		return dateB - dateA;
-	});
-
-	const sortPopular = posts.items.slice().sort((a, b) => {
-		let popularA = a.viewsCount, popularB = b.viewsCount;
-		return popularB - popularA;
-	});
 
 	const [value, setValue] = React.useState('1');
 	const handleChange = (event, newValue) => {
@@ -38,8 +25,8 @@ export default function PostsBlock() {
 						<Tab label="Популярные" value="2" />
 					</TabList>
 				</Box>
-				<TabPanel value="1"><PostInfo sort={ sortDate } /></TabPanel>
-				<TabPanel value="2"><PostInfo sort={ sortPopular } /></TabPanel>
+				<TabPanel value='1'><PostInfo value='1' /></TabPanel>
+				<TabPanel value='2'><PostInfo value='2' /></TabPanel>
 			</TabContext>
 		</Box>
 	);
