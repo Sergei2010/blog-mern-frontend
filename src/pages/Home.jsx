@@ -17,7 +17,6 @@ export const Home = () => {
     dispatch(fetchTags());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <>
       <Grid container spacing={ 4 }>
