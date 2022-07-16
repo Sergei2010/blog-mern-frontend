@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Post } from './index';
+import { Post } from './Post';
 
 import { fetchPosts } from '../../redux/slices/posts';
 
@@ -24,8 +24,8 @@ export default function PostInfo({ value }) {
 	React.useEffect(() => {
 		setData(arr.sort((a, b) => {
 			return value === '1'
-				? sortPopular(a, b)
-				: sortDate(a, b);
+				? sortDate(a, b)
+				: sortPopular(a, b);
 		}));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [posts]);

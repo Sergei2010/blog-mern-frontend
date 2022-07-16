@@ -3,9 +3,9 @@ import React from "react";
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
-import { Post } from "../components/Post";
-import { Index } from "../components/AddComment";
-import { CommentsBlock } from "../components/CommentsBlock";
+import { Post } from '../components/Post/Post';
+import { Index } from '../components/AddComment';
+import { CommentsBlock } from '../components/CommentsBlock';
 import axios from "../axios";
 
 export const FullPost = () => {
