@@ -3,21 +3,25 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Post } from './Post';
 
-import { fetchPosts } from '../../redux/slices/posts';
+import { fetchFilterPosts } from '../../redux/slices/filter';
 
 export default function PostInfo({ value }) {
 	const [data, setData] = React.useState([]);
 	const dispatch = useDispatch();
 	const userData = useSelector((state) => state.auth.data);
-	const { posts } = useSelector(state => state.posts);
-	const isPostsLoading = posts.status === 'loading';
+	//const category = useSelector((state) => state.filters.category);
+	//console.log('category:', category);
+
+	const { filterPosts } = useSelector(state => state.filters);
+
+	const isPostsLoading = filterPosts.status === 'loading';
 
 	React.useEffect(() => {
-		dispatch(fetchPosts());
+		dispatch(fetchFilterPosts());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const arr = posts.items.slice();
+	const arr = filterPosts.items.slice();
 	const sortPopular = (a, b) => b.viewsCount - a.viewsCount;
 	const sortDate = (a, b) => new Date(b.createdAt) - new Date(a.createdAt);
 
@@ -28,7 +32,7 @@ export default function PostInfo({ value }) {
 				: sortPopular(a, b);
 		}));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [posts]);
+	}, [filterPosts]);
 
 	return (
 		<>

@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material/styles";
 
 export const theme = createTheme({
   // @ts-ignore
-  shadows: ["none"],
+  shadows: [1],
   palette: {
     primary: {
       main: "#4361ee",
