@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId } from '../redux/slices/filter';
+import { setCategory } from '../redux/slices/filter';
 
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
@@ -13,12 +13,21 @@ import PostInfo from './Post/PostInfo';
 export default function PostsBlock() {
 
 	const dispatch = useDispatch();
-	const categoryId = String(useSelector(state => state.filter.categoryId));
-
-	console.log('categoryId:', categoryId);
+	const categoryId = useSelector(state => state.filters.category.categoryId);
+	//console.log('categoryId:', categoryId);
 
 	const onChangeCategoryId = (event, id) => {
-		dispatch(setCategoryId(String(id)));
+		id === '1'
+			? dispatch(setCategory({
+				categoryId: String(id),
+				sort: 'Новые',
+				sortProperty: 'createdAt',
+			}))
+			: dispatch(setCategory({
+				categoryId: String(id),
+				sort: 'Популярные',
+				sortProperty: 'viewsCount',
+			}));
 	};
 
 	return (

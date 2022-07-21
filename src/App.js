@@ -7,6 +7,7 @@ import Container from "@mui/material/Container";
 import { Header } from "./components";
 import { Home, FullPost, Registration, AddPost, Login } from "./pages";
 import { fetchAuthMe/* , selectIsAuth */ } from './redux/slices/auth';
+import TagsList from './pages/TagsList';
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +27,8 @@ function App() {
           <Route path="/posts/:id/edit" element={ <AddPost /> } />
           <Route path="/add-post" element={ <AddPost /> } />
           <Route path="/login" element={ <Login /> } />
-          <Route path="/register" element={ <Registration /> } />
+          <Route path="/tags/:tagName" element={ <TagsList /> } />
+          <Route path="/" element={ <Registration /> } />
         </Routes>
       </Container>
     </>

@@ -12,7 +12,7 @@ export const fetchTags = createAsyncThunk('posts/fetchTags', async () => {
 	return data;
 });
 
-export const fetchRemovePost = createAsyncThunk('posts/ fetchRemovePost', async (id) => {
+export const fetchRemovePost = createAsyncThunk('posts/fetchRemovePost', async (id) => {
 	axios.delete(`/posts/${id}`);
 });
 
@@ -30,7 +30,6 @@ const initialState = {
 const postsSlice = createSlice({
 	name: 'posts',
 	initialState,
-	// @ts-ignore
 	reducers: {},
 	extraReducers: {
 		// Получение статей

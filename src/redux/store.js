@@ -7,7 +7,7 @@ const store = configureStore({
 	reducer: {
 		posts: postsReducer,
 		auth: authReducer,
-		filter: filterReducer,
+		filters: filterReducer,
 	}
 });
 

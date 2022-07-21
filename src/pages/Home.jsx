@@ -1,6 +1,8 @@
 // @ts-nocheck
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import qs from 'qs';
+import { useNavigate } from 'react-router-dom';
 
 import Grid from '@mui/material/Grid';
 
@@ -8,15 +10,48 @@ import PostsBlock from '../components/PostsBlock';
 import { TagsBlock } from '../components/TagsBlock';
 import { CommentsBlock } from '../components/CommentsBlock';
 import { fetchTags } from '../redux/slices/posts';
+import { setFilters } from '../redux/slices/filter';
 
 export const Home = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { tags } = useSelector(state => state.posts);
+  const category = useSelector(state => state.filters.category);
+
   const isTagsLoading = tags.status === 'loading';
+  const isMounted = React.useRef(false);
+
+  // если это был первый рендер, то проверяем url-строку и сохраняем данные в redux
+  React.useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+
+      dispatch(setFilters({
+        ...params,
+      }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   React.useEffect(() => {
     dispatch(fetchTags());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // понимаем, что это уже непервый рендер и вшиваем url-строку данные из filterSlice
+  // лайфхак для исключения первого рендера
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        sortProperty: category.sortProperty,
+        categoryId: category.categoryId,
+      });
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category]);
+
   return (
     <>
       <Grid container spacing={ 4 }>
